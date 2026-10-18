@@ -48,7 +48,7 @@ Community) with **Desktop development with C++** - see [Building the Windows gam
 
 ## Setup
 
-1. Get this repository: `git clone https://github.com/pkdec/uDPR.git` (or **Code > Download ZIP** and unpack it).
+1. Get this repository: `git clone git clone https://github.com/nebraskabirdwatching-pokemon-firered/uDPR.git` (or **Code > Download ZIP** and unpack it).
 2. Run **`setup.cmd`** in its folder.
 
 The setup:
