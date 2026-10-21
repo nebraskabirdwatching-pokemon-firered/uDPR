@@ -4042,13 +4042,19 @@ namespace Dpr.EvScript
             if (_msgWindow == null)
                 return true;
 
-            if (_msgWindowCoroutine == null)
-            {
-                if (MsgWindowManager.Instance.MsgWindow.IsAuto || FieldInput.PushAB())
-                    FlagWork.SetWork(work, 1);
+            if (_msgWindowCoroutine != null)
+                return false;
 
-                if (FieldInput.PushX())
-                    FlagWork.SetWork(work, 0);
+            if (MsgWindowManager.Instance.MsgWindow.IsAuto || FieldInput.PushAB())
+            {
+                FlagWork.SetWork(work, 1);
+                return true;
+            }
+
+            if (FieldInput.PushX())
+            {
+                FlagWork.SetWork(work, 0);
+                return true;
             }
 
             return false;
