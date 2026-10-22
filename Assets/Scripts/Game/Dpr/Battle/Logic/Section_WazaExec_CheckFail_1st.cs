@@ -186,7 +186,9 @@ namespace Dpr.Battle.Logic
 				if (!attacker.CheckKonranWakeUp())
 				{
 					GetServerCommandPutter().ConfusionAct(attacker);
-					return calc.IsOccurPer(33);
+					bool selfHit = calc.IsOccurPer(33);
+					UnityEngine.Debug.Log("[Konran] self-hit roll = " + selfHit);
+					return selfHit;
 				}
 				cureSick_KONRAN(attacker);
 			}

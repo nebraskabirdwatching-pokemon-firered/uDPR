@@ -502,7 +502,13 @@ public class PlayerWork : global::SmartPoint.Components.PlayerPrefsProvider<glob
         instance._saveData.boolValues[(int)index] = value;
     }
 	public static bool GetSytemFlag(global::Dpr.EvScript.EvWork.SYSFLAG_INDEX index) {
-        // shipped: an empty range test (index - 0x326 < 4) precedes the read (@02ceda30) - no effect
+        // shipped @02ceda64: `sub w8, w19, #806 ; cmp w8, #4 ; b.hs <read> ; mov w0, #1 ; ret` -
+        // system flags 806-809 (SYS_FLAG_WILDCARD_000..003) always read as ON; the save is not consulted.
+        // Without this the town signs (c04-c09 ev_cXX_sign1) take their _IF_FLAGOFF_JUMP 806 to
+        // ev_c01_sign1_01 and show Jubilife's "City of Joy" text.
+        if ((uint)((int)index - 806) < 4)
+            return true;
+
         return instance._saveData.systemFlags[(int)index];
     }
 	public static void SetSytemFlag(global::Dpr.EvScript.EvWork.SYSFLAG_INDEX index, bool value) {

@@ -5,6 +5,7 @@ namespace Dpr.Battle.Logic
 	{
 		public Section_ConfDamage(in global::Dpr.Battle.Logic.Section.CommonParam commonParam) : base(commonParam) { }
 		public void Execute(global::Dpr.Battle.Logic.Section_ConfDamage.Result pResult, in global::Dpr.Battle.Logic.Section_ConfDamage.Description description) {
+            UnityEngine.Debug.Log("[Konran] ConfDamage start");
             pResult.damage = 0;
             ushort damage = calcDamage(description.attacker);
             damage = fixDamage(description.attacker, damage);
@@ -15,6 +16,7 @@ namespace Dpr.Battle.Logic
 
             GetEventLauncher().Event_ConfDamageReaction(description.attacker, description.attacker);
             pResult.damage = fixedDamage;
+            UnityEngine.Debug.Log("[Konran] ConfDamage done, damage = " + fixedDamage);
         }
 		private ushort calcDamage(global::Dpr.Battle.Logic.BTL_POKEPARAM poke) {
 			uint atkPower = (uint)poke.GetValue(BTL_POKEPARAM.ValueID.BPP_ATTACK);
